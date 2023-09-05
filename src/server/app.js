@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var helmet = require('helmet');
 var port = process.env.PORT || 8001;
 var four0four = require('./utils/404')();
 
@@ -54,6 +55,8 @@ switch (environment){
         app.use('/*', express.static('./src/client/index.html'));
         break;
 }
+
+app.use(helmet());
 
 app.listen(port, function() {
     console.log('Express server listening on port ' + port);

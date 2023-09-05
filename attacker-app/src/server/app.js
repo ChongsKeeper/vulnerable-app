@@ -6,6 +6,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var helmet = require('helmet');
 var port = process.env.PORT || 8001;
 var four0four = require('./utils/404')();
 
@@ -15,6 +16,7 @@ app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(logger('dev'));
+app.use(helmet());
 
 app.use('/api', require('./routes'));
 
