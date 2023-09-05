@@ -2,6 +2,7 @@ var router = require('express').Router();
 var four0four = require('./utils/404')();
 var data = require('./data');
 data.profile = {};
+var escapeHtml = require('escape-html');
 
 router.get('/people', getPeople);
 router.get('/person/:id', getPerson);
@@ -32,7 +33,8 @@ function search(req, res, next) {
 function getProfile(req, res, next) {
     console.log('User Requesting Read: ', req.cookies.userAuthToken);
     console.log('Profile found: ', data.profile[req.cookies.userAuthToken]);
-    res.status(200).send(data.profile[req.cookies.userAuthToken]);
+    var sanitizedProfile = escapeHtml(data.profile[req.cookies.userAuthToken]);
+    res.status(200).send(sanitizedProfile);
 }
 
 function updateProfile(req, res, next) {
