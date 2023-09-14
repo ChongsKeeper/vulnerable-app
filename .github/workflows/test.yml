@@ -1,0 +1,17 @@
+permissions:
+    statuses: write
+
+on: [pull_request, workflow_dispatch]
+
+jobs:
+    test_job:
+        runs-on: ubuntu-latest
+        steps:
+            # To use this action,
+            # you must check out the repository
+            - name: Checkout
+              uses: actions/checkout@v3
+            - run: |
+                REPO=$(git remote get-url origin)
+                REPO=${REPO%".git"}
+                echo "$REPO"
