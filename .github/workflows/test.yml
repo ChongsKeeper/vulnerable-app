@@ -12,6 +12,5 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
             - run: |
-                REPO=$(git remote get-url origin)
-                REPO=${REPO%".git"}
-                echo "$REPO"
+                BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+                echo "$BRANCH"
